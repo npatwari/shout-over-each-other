@@ -6,7 +6,7 @@ This repo provides code to:
 * Load the data into a python notebook to look at the received data
 * Instructions on how to do the above.
 
-### Group resource assignments table
+### Resource Options Table
 
 Refer to this table as needed to reserve nodes and remember proper gain settings.  
 
@@ -16,7 +16,7 @@ Refer to this table as needed to reserve nodes and remember proper gain settings
 |  Dense Deployment | `cnode-ebc`, `cnode-guesthouse`, `cnode-mario`, `cnode-moran`, `cnode-ustar` | TX: 80, RX: 70 |
 
 
-### Instantiate a Shout experiment
+### Instantiate a Shout Experiment
 Instantiate a `shout-long-measurement` profile experiment
 * Navigate to: https://www.powderwireless.net/
 * Go to Experiments: Start Experiment
@@ -28,7 +28,7 @@ Instantiate a `shout-long-measurement` profile experiment
     - Expand "Frequency ranges for CBAND operation." You should look at [what is available](https://www.powderwireless.net/resinfo.php). My experiments reserve 2-20 MHz depending on my sample rate settings.
     - Click "Next"
 * On the "Finalize" step:
-    - Select the "POWDER-Train-26" project, or whatever project that you and your students doing the tutorial are in.
+    - Select the "POWDER-Train-26" project, or whatever project that you and your collaborators are in.
 * On the "Schedule" step, leave all fields at their defaults (or pick your start and end time) and click "Finish"
 * Wait for the experiment to instantiate (turn green), and the startup scripts to finish
 
@@ -37,7 +37,7 @@ Instantiate a `shout-long-measurement` profile experiment
 
 We first need to create multiple terminal windows: two logged into the ORCH node, one for each Client node, and one window just on your local laptop.
 
-Run this command into a new terminal window to connect via ssh to the orchestrator node.
+Run this command into a new terminal window to connect via ssh to the ORCH node.
 ```
 ssh -Y -p 22 -t username@pcWWW.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout1 &&  exec $SHELL'
 ```
@@ -57,9 +57,9 @@ ssh -Y -p 22 -t username@pcWWW.emulab.net 'cd /local/repository/bin && tmux new-
 where `username` is your username, and replace pcWWW with the node name of the next Client node.
 
 
-### Check each SDR's FPGA
-Check each rooftop node `cbrssdr*` software-defined radio, which sometimes have an FPGA image different from the one we want for Shout, as follows.
+### Check Each SDR's FPGA
 
+If you are using rooftop nodes, you need to check each rooftop node `cbrssdr*` software-defined radio, because they sometimes have an FPGA image different from the one we want for Shout. Do this as follows.
 
 In each of the Client node terminal windows, run `uhd_usrp_probe`. 
 
@@ -77,7 +77,7 @@ then do the following steps to flash the FPGA with the correct version of build:
 ### Start the Shout Framework
 
 
-In the orchestrator window, run
+In the ORCH window, run
 ```
 ./1.start_orch.sh
 ```
@@ -92,11 +92,11 @@ Now Shout is started and ready to "run" the measurement procedure.
 ### Edit the Experiment Parameters JSON File
 
 
-You're going to edit the entries of the JSON file `save_iq_w_tx_file.json` parameter structure to have the values corresponding to the experiment you want to run. These instructions are for you to edit the file on your local machine and then scp it to all of the nodes. Here's how to set the JSON file:
+You're going to edit the entries of the JSON file `save_iq_w_tx_file.json` parameter structure to have the values corresponding to the experiment you want to run. My version of this file is in this repo. These instructions are for you to edit the file on your local machine and then scp it to all of the nodes. Here's how to set the JSON file, and some notes about how it might change for your experiment:
 
 | Field | Value it should be | Description |
 |------|------|------|
-| "cmd" | "save_iq_w_tx" | The name of command for the shout code to run. This is always the one to use for shout-over-each-other, as it is the command I modified. |
+| "cmd" | "save_iq_w_tx" | The name of command for the shout code to run. This "save_iq_w_tx" is always the one to use for shout-over-each-other, as it is the command I modified. |
 | "sync" | true | True indicates Shout should synchronize transmission and reception | 
 | "timeout" | 30 | How many ms before giving up at the TX |
 | "nsamps" | 8192 | Number of samples to receive |
@@ -124,7 +124,7 @@ Take a look at the file to double check. In particular check that
 cat /local/repository/etc/cmdfiles/save_iq_w_tx_cw.json
 ```
 
-### Send files to the ORCH and Client Nodes
+### Send Files to the ORCH and Client Nodes
 
 Send the .iq file to each client. I run these commands in a terminal on my local laptop. The form is `scp <local file> <username>@<destination-ip>:<file-path>`. We are sending the iq file to all nodes. For my recent experiment, the commands were:
 ```
@@ -154,16 +154,15 @@ scp ./measiface.py npatwari@pc05-fort.emulab.net:/local/repository/shout/
 ```
 Change the local file path and name, username, and ip addresses to suit your experiment.
 
-### Execute the Shout measurement command
+### Execute the Shout Measurement Command
 
 On your iface-node terminal window, run
 ```
 ./3.run_cmd.sh
 ```
-This takes time, proportional to (2^N-1), where N is the number of nodes. It will try every possible combination of nodes as transmitters (and remaining nodes as receivers). It does include the case of all nodes as receivers, which gives a baseline noise-only measurement. It does not include the case of all nodes as transmitters, as there would be no nodes to receive.
+This takes time proportional to (2^N-1), where N is the number of nodes. It will try every possible combination of nodes as transmitters (and remaining nodes as receivers). It does include the case of all nodes as receivers, which gives a baseline noise-only measurement. It does not include the case of all nodes as transmitters, as there would be no nodes to receive.
 
-### Copy your data back to your local laptop
-(Team member #4) 
+### Copy Data Back to your Local Laptop
 
 While still on the iface-node terminal window, do a `ls /local/data/` to see your data directory. Copy the directory name. If there is more than one, you probably ran the measurement multiple times, and you can pick whichever one you want.
 
@@ -173,10 +172,9 @@ scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_03-10-2026_15-23-32/
 ```
 where, again, change the username, and change pc05-fort to your ORCH name; and change `Shout_meas_03-10-2026_15-23-32` to the directory you saw when running the `ls /local/data/` command, and `data/` to the folder on your local laptop where you're saving your experimental data.
 
-Zip this local directory on your laptop, if you're going to upload it to Google Colab.
+Zip/compress this local directory on your laptop, if you're going to upload it to Google Colab.
 
 ### Analyze the Data
-(All team members individually)
 
 In this step, you will load and run a Jupyter notebook, to be posted. 
 
