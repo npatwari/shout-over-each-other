@@ -13,7 +13,7 @@ Refer to this table as needed to reserve nodes and remember proper gain settings
 |  Node Type | Nodes | TX/RX Gains |
 |---------|----|--------------|
 |    Rooftop | `cbrssdr1-bes`, `cbrssdr1-browning`, `cbrssdr1-fm`,  `cbrssdr1-honors`, `cbrssdr1-hospital`, `cbrssdr1-ustar` |  TX: 27, RX:30 |
-|  Dense Deployment | TX: 80, RX: 70 |
+|  Dense Deployment | `cnode-ebc`, `cnode-guesthouse`, `cnode-mario`, `cnode-moran`, `cnode-ustar` | TX: 80, RX: 70 |
 
 
 ### Instantiate a Shout experiment
@@ -32,16 +32,36 @@ Instantiate a `shout-long-measurement` profile experiment
 * On the "Schedule" step, leave all fields at their defaults (or pick your start and end time) and click "Finish"
 * Wait for the experiment to instantiate (turn green), and the startup scripts to finish
 
+
+### Open Lots of Terminal Windows
+
+We first need to create multiple terminal windows: two logged into the ORCH node, one for each Client node, and one window just on your local laptop.
+
+Run this command into a new terminal window to connect via ssh to the orchestrator node.
+```
+ssh -Y -p 22 -t username@pcWWW.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout1 &&  exec $SHELL'
+```
+where `username` is your username, and replace pcWWW with the node name of the orchestrator. This command starts you in the `/local/repository/bin/` directory.
+
+Then get a new tab (a new terminal window) and do the 2nd ORCH terminal:
+```
+ssh -Y -p 22 -t username@pcWWW.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout2 &&  exec $SHELL'
+```
+The only difference is that this tab will be labelled "shout2" instead of "shout1".
+
+Then continue with each node, each in its own terminal window, with 
+```
+ssh -Y -p 22 -t username@pcWWW.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+
+```
+where `username` is your username, and replace pcWWW with the node name of the next Client node.
+
+
 ### Check each SDR's FPGA
 Check each rooftop node `cbrssdr*` software-defined radio, which sometimes have an FPGA image different from the one we want for Shout, as follows.
 
-Log on to each rooftop SDR's compute node. (I find it easiest to copy and paste the following commands and edit them in a separate editor, so I can copy and paste multiple ssh commands exactly as I want them.) For each compute node connected to a rooftop / `cbrssdr1` node, connect to it via ssh:
-```
-ssh -Y -p 22 -t username@pcXXX.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
-```
-where "username" is your username, and pcXXX is the compute **node** name.
 
-When connected, run `uhd_usrp_probe`. 
+In each of the Client node terminal windows, run `uhd_usrp_probe`. 
 
 If successful, it shows some information about the setup of the SDR.
 
@@ -55,11 +75,7 @@ then do the following steps to flash the FPGA with the correct version of build:
 3. After about a minute, run `uhd_find_devices` and `uhd_usrp_probe` to check that the radio is back on and now has the correct FPGA build version.
 
 ### Start the Shout Framework
-Run this command into a new terminal window to connect via ssh to the orchestrator node.
-```
-ssh -Y -p 22 -t username@pcWWW.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout1 &&  exec $SHELL'
-```
-where `username` is your username, and replace pcWWW with the node name of the orchestrator. This command starts you in the `/local/repository/bin/` directory.
+
 
 In the orchestrator window, run
 ```
