@@ -1,0 +1,23 @@
+[
+ {
+    "cmd": "save_iq_w_tx",
+    "sync": true,
+    "timeout": 30,
+    "nsamps": 8192,
+    "wotxrepeat": 4,
+    "txrate": 0.25e6,
+    "txfreq": 3395.125e6,
+    "txgain": {"fixed": 27.0},
+    "txsamps": {"file": "/local/repository/shout/signal_library/channel-sounding-OFDM-packet-10-03-26.iq"},
+    "txwait": 3,
+    "use_lo_offset": true,
+    "rxrate": 0.25e6,
+    "rxfreq": 3395.125e6,
+    "rxgain": {"fixed": 30.0},
+    "rxrepeat": 4,
+    "rxwait": {"min": 50, "max": 2000, "res": "ms"},
+    "txclients": ["cbrssdr1-bes-comp", "cbrssdr1-browning-comp", "cbrssdr1-fm-comp"],
+    "rxclients": ["cbrssdr1-bes-comp", "cbrssdr1-browning-comp", "cbrssdr1-fm-comp"]
+
+ }
+]

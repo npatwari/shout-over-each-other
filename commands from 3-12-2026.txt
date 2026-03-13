@@ -1,0 +1,77 @@
+commands from 3-2-2026
+
+
+# Start ssh terminal windows with orch and clients
+ssh -Y -p 22 -t npatwari@pc05-fort.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout1 &&  exec $SHELL'
+ssh -Y -p 22 -t npatwari@pc05-fort.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout2 &&  exec $SHELL'
+
+ssh -Y -p 22 -t npatwari@pc09-fort.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+ssh -Y -p 22 -t npatwari@pc08-fort.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+ssh -Y -p 22 -t npatwari@pc11-fort.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+
+
+# Send the .iq file to each client
+scp /Users/neal/git/npatwari/ch-sounding-ofdm-packet/channel-sounding-OFDM-packet-10-03-26.iq npatwari@pc05-fort.emulab.net:/local/repository/shout/signal_library/
+scp /Users/neal/git/npatwari/ch-sounding-ofdm-packet/channel-sounding-OFDM-packet-10-03-26.iq npatwari@pc09-fort.emulab.net:/local/repository/shout/signal_library/
+scp /Users/neal/git/npatwari/ch-sounding-ofdm-packet/channel-sounding-OFDM-packet-10-03-26.iq npatwari@pc08-fort.emulab.net:/local/repository/shout/signal_library/
+scp /Users/neal/git/npatwari/ch-sounding-ofdm-packet/channel-sounding-OFDM-packet-10-03-26.iq npatwari@pc11-fort.emulab.net:/local/repository/shout/signal_library/
+
+
+QPSK_signal_v2026.iq
+
+
+
+# Fetch the measiface.py command from the ORCH
+scp npatwari@pc05-fort.emulab.net:/local/repository/shout/measiface.py .
+
+# Copy the measiface.py command from my computer to the ORCH
+scp ./measiface.py npatwari@pc05-fort.emulab.net:/local/repository/shout/
+
+
+
+# Send the .json file to orch AND each client
+scp /Users/neal/git/npatwari/simul-tx-exp/save_iq_w_tx_file.json npatwari@pc05-fort.emulab.net:/local/repository/etc/cmdfiles/ 
+scp /Users/neal/git/npatwari/simul-tx-exp/save_iq_w_tx_file.json npatwari@pc09-fort.emulab.net:/local/repository/etc/cmdfiles/ 
+scp /Users/neal/git/npatwari/simul-tx-exp/save_iq_w_tx_file.json npatwari@pc11-fort.emulab.net:/local/repository/etc/cmdfiles/ 
+scp /Users/neal/git/npatwari/simul-tx-exp/save_iq_w_tx_file.json npatwari@pc08-fort.emulab.net:/local/repository/etc/cmdfiles/ 
+
+
+
+# Fetch the JSON file from the orch to my computer
+scp npatwari@pc05-fort.emulab.net:/local/repository/etc/cmdfiles/save_iq_w_tx_file.json .
+
+# Get from the ORCH
+scp npatwari@pc05-fort.emulab.net:/local/repository/shout/measiface.py .
+scp npatwari@pc05-fort.emulab.net:/local/repository/shout/measurements_pb2.py .
+
+# Put on the ORCH from my computer
+scp ./measiface.py npatwari@pc05-fort.emulab.net:/local/repository/shout/
+
+
+# Fetch the measured data on the ORCH back to my computer
+
+scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_03-10-2026_15-23-32/ data/
+
+      
+    
+  Shout_meas_03-12-2026_21-15-29  Shout_meas_03-12-2026_21-23-29
+Shout_meas_03-12-2026_14-21-25  Shout_meas_03-12-2026_21-18-23  
+
+scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_03-12-2026_13-12-48/ data/
+scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_03-12-2026_13-37-18/ data/
+scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_03-12-2026_14-16-11/ data/
+scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_03-12-2026_14-21-25/ data/
+scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_03-12-2026_14-26-15/ data/
+scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_03-12-2026_14-31-21/ data/
+
+scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_03-12-2026_21-27-21/ data/
+
+# Each TX packet has 3200 samples
+# Notes on mistakes I made:
+# 1. If the file name in the .json file is incorrect, each node quits when it is asked to transmit. Each round, one fewer receiver is operating. By the end, there are no receivers operating.
+# 2. I did np.repeat() incorrectly and each value was repeated, not the symbol. Which led to a pretty narrowband signal, which I could see from the PSD of the received signals.
+
+.
+
+
+
