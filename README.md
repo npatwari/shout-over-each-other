@@ -11,7 +11,7 @@ This repo provides code to:
 Refer to this table as needed to reserve nodes and remember proper gain settings.  
 
 |  Node Type | Nodes | TX/RX Gains |
-|---------|----|--------------|--------|-------|------|---------|
+|---------|----|--------------|
 |    Rooftop | `cbrssdr1-bes`, `cbrssdr1-browning`, `cbrssdr1-fm`,  `cbrssdr1-honors`, `cbrssdr1-hospital`, `cbrssdr1-ustar` |  TX: 27, RX:30 |
 |  Dense Deployment | TX: 80, RX: 70 |
 
@@ -93,7 +93,7 @@ You're going to edit the entries of the JSON file `save_iq_w_tx_file.json` param
 | "txwait" | 3 | The transmitter is set to wait a certain duration (in ms, I believe) after the start of the second (when the PPS signal changes)|
 | "rxrate" | 500e3 | Sampling rate at the receiver, typically identical to `txrate`. |
 | "rxgain" | `{"fixed": YY.0}`| where `YY` is your gain for your SDR receiver, either 30 or 70, depending on what type of SDR you're using.|  
-| "rxrepeat" | 2 | How many repetitions will be done of each link measurement |
+| "rxrepeat" | 4 | How many repetitions will be done of each link measurement |
 | "rxwait" | `{"min": 50, "max": 2000, "res": "ms"}` | The time to wait between successive RX operations (when using "rxrepeat") |
 | "txclients" | A list of the compute node IDs (in the ID column of List View) | The IDs are the names ending in "-comp" for Groups 1, 2 or 3, or ending in "-dd-b210" for Group 4,5 or 6. For example: `["cbrssdr1-honors-comp", "cbrssdr1-hospital-comp", "cbrssdr1-ustar-comp"]`|
 | "rxclients"| The exact same list as for txclients | same as above|
