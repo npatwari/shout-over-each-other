@@ -1,0 +1,22 @@
+[
+ {
+    "cmd": "save_iq_w_tx",
+    "sync": true,
+    "timeout": 30,
+    "nsamps": 8192,
+    "wotxrepeat": 1,
+    "txrate": 5e6,
+    "txfreq": 3385e6,
+    "txgain": {"fixed": 80.0},
+    "txsamps": {"file": "/local/repository/shout/signal_library/ofdm.iq"},
+    "txwait": 3,
+    "use_lo_offset": true,
+    "rxrate": 5e6,
+    "rxfreq": 3385e6,
+    "rxgain": {"fixed": 70.0},
+    "rxrepeat": 4,
+    "rxwait": {"min": 50, "max": 2000, "res": "ms"},
+    "txclients": ["cnode-ebc-dd-b210", "cnode-guesthouse-dd-b210", "cnode-mario-dd-b210", "cnode-moran-dd-b210", "cnode-ustar-dd-b210"],
+    "rxclients": ["cnode-ebc-dd-b210", "cnode-guesthouse-dd-b210", "cnode-mario-dd-b210", "cnode-moran-dd-b210", "cnode-ustar-dd-b210"]
+ }
+]
