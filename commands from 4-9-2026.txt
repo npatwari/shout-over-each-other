@@ -1,0 +1,53 @@
+
+
+# Start ssh terminal windows with orch and clients
+ssh -Y -p 22 -t npatwari@pc05-fort.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout1 &&  exec $SHELL'
+ssh -Y -p 22 -t npatwari@pc05-fort.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout2 &&  exec $SHELL'
+
+ssh -Y -p 22 -t npatwari@cnode-ebc.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+ssh -Y -p 22 -t npatwari@cnode-guesthouse.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+ssh -Y -p 22 -t npatwari@cnode-mario.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+ssh -Y -p 22 -t npatwari@cnode-moran.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+ssh -Y -p 22 -t npatwari@cnode-ustar.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+ssh -Y -p 22 -t npatwari@cnode-wasatch.emulab.net 'cd /local/repository/bin && tmux new-session -A -s shout &&  exec $SHELL'
+
+
+
+# Send the .iq file to each client {different IQ files for each transmitter}
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@cnode-ebc.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-b.iq npatwari@cnode-guesthouse.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-c.iq npatwari@cnode-mario.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-d.iq npatwari@cnode-moran.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-e.iq npatwari@cnode-ustar.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-f.iq npatwari@cnode-wasatch.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+
+# Send the .iq file to each client {same IQ files for each transmitter}
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@cnode-ebc.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@cnode-guesthouse.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@cnode-mario.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@cnode-moran.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@cnode-ustar.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-set-64pilots/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@cnode-wasatch.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+
+# Send the .json file to orch AND each client
+scp /Users/neal/git/npatwari/shout-over-each-other/save_iq_w_tx_file-ddnodes.json npatwari@pc05-fort.emulab.net:/local/repository/etc/cmdfiles/save_iq_w_tx_file.json
+scp /Users/neal/git/npatwari/shout-over-each-other/save_iq_w_tx_file-ddnodes.json npatwari@cnode-ebc.emulab.net:/local/repository/etc/cmdfiles/save_iq_w_tx_file.json
+scp /Users/neal/git/npatwari/shout-over-each-other/save_iq_w_tx_file-ddnodes.json npatwari@cnode-guesthouse.emulab.net:/local/repository/etc/cmdfiles/save_iq_w_tx_file.json
+scp /Users/neal/git/npatwari/shout-over-each-other/save_iq_w_tx_file-ddnodes.json npatwari@cnode-mario.emulab.net:/local/repository/etc/cmdfiles/save_iq_w_tx_file.json
+scp /Users/neal/git/npatwari/shout-over-each-other/save_iq_w_tx_file-ddnodes.json npatwari@cnode-moran.emulab.net:/local/repository/etc/cmdfiles/save_iq_w_tx_file.json
+scp /Users/neal/git/npatwari/shout-over-each-other/save_iq_w_tx_file-ddnodes.json npatwari@cnode-ustar.emulab.net:/local/repository/etc/cmdfiles/save_iq_w_tx_file.json
+scp /Users/neal/git/npatwari/shout-over-each-other/save_iq_w_tx_file-ddnodes.json npatwari@cnode-wasatch.emulab.net:/local/repository/etc/cmdfiles/save_iq_w_tx_file.json
+
+
+# Put on the ORCH from my computer, while the local current directory is the shout-over-each-other directory
+scp /Users/neal/git/npatwari/shout-over-each-other/measiface.py npatwari@pc05-fort.emulab.net:/local/repository/shout/
+scp /Users/neal/git/npatwari/shout-over-each-other/meascli.py npatwari@cnode-ebc.emulab.net:/local/repository/shout/
+scp /Users/neal/git/npatwari/shout-over-each-other/meascli.py npatwari@cnode-guesthouse.emulab.net:/local/repository/shout/
+scp /Users/neal/git/npatwari/shout-over-each-other/meascli.py npatwari@cnode-mario.emulab.net:/local/repository/shout/
+scp /Users/neal/git/npatwari/shout-over-each-other/meascli.py npatwari@cnode-moran.emulab.net:/local/repository/shout/
+scp /Users/neal/git/npatwari/shout-over-each-other/meascli.py npatwari@cnode-ustar.emulab.net:/local/repository/shout/
+scp /Users/neal/git/npatwari/shout-over-each-other/meascli.py npatwari@cnode-wasatch.emulab.net:/local/repository/shout/
+
+
+# Fetch the measured data on the ORCH back to my computer
+scp -r npatwari@pc05-fort.emulab.net:/local/data/Shout_meas_04-09-2026_15-31-17/ data/
