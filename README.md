@@ -135,8 +135,15 @@ scp /Users/neal/git/npatwari/ch-sounding-ofdm-packet/channel-sounding-OFDM-packe
 ```
 Change the local file path and name, username, and ip addresses to suit your experiment.
 
+> **Optionally, you can send different iq files to each client**. But the files have to have the same name on the client, because the JSON file only lists one file name, identical for each client. In that case, you would assign an identical filename on the client node, even though the files are named differently on your laptop:
+> ```
+> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@cnode-ebc.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-b.iq npatwari@cnode-guesthouse.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-c.iq npatwari@cnode-mario.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-d.iq npatwari@cnode-moran.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+> ```
 
-Next, send the .json file to each node. I run these commands in a terminal on my local laptop. The form is `scp <local file> <username>@<destination-ip>:<file-path>`. We are sending the JSON file to all nodes. For my recent experiment, the commands were:
+Next, send the .json file to each node (clients and ORCH node). I run these commands in a terminal on my local laptop. The form is `scp <local file> <username>@<destination-ip>:<file-path>`. We are sending the JSON file to all nodes. For my recent experiment, the commands were:
 ```
 scp ./save_iq_w_tx_file.json npatwari@pc05-fort.emulab.net:/local/repository/etc/cmdfiles/ 
 scp ./save_iq_w_tx_file.json npatwari@pc09-fort.emulab.net:/local/repository/etc/cmdfiles/ 
@@ -156,7 +163,7 @@ Change the local file path and name, username, and ip addresses to suit your exp
 
 ### Execute the Shout Measurement Command
 
-On your iface-node terminal window, run
+On your ORCH node terminal window, run
 ```
 ./3.run_cmd.sh
 ```
