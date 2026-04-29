@@ -126,7 +126,11 @@ cat /local/repository/etc/cmdfiles/save_iq_w_tx_cw.json
 
 ### Send Files to the ORCH and Client Nodes
 
-Send the .iq file to each client. I run these commands in a terminal on my local laptop. The form is `scp <local file> <username>@<destination-ip>:<file-path>`. We are sending the iq file to all nodes. For my recent experiment, the commands were:
+Send the .iq file to each client. I run these commands in a terminal on my local laptop. The form is `scp <local file> <username>@<destination-ip>:<file-path>`. We are sending the iq file to all nodes. 
+
+**FYI** All .iq files must contain a number of samples that is a multiple of 1024. Otherwise transmission fails due to a bug in Shout.
+
+For my recent experiment, the commands were:
 ```
 scp /Users/neal/git/npatwari/ch-sounding-ofdm-packet/channel-sounding-OFDM-packet-10-03-26.iq npatwari@pc05-fort.emulab.net:/local/repository/shout/signal_library/
 scp /Users/neal/git/npatwari/ch-sounding-ofdm-packet/channel-sounding-OFDM-packet-10-03-26.iq npatwari@pc09-fort.emulab.net:/local/repository/shout/signal_library/
