@@ -183,6 +183,7 @@ Zip/compress this local directory on your laptop, if you're going to upload it t
 
 ### Analyze the Data
 
-In this step, you will load and run a Jupyter notebook, to be posted. 
+In this step, you will load and run python code in two Jupyter notebooks: `OFDM_Multi_TX_Channel_Sounding_RX.ipynb` and `Load_Measurements_From_Pickle.ipynb`. They're not complete yet, so they will not run completely, but the code is provided for getting you the ability to load the received hdf5 files, and to be able to process them. The current state of the code is to compute average received power during the overlap of the multiple transmissions.
+
 
 
