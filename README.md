@@ -128,7 +128,7 @@ cat /local/repository/etc/cmdfiles/save_iq_w_tx_cw.json
 
 Send the .iq file to each client. I run these commands in a terminal on my local laptop. The form is `scp <local file> <username>@<destination-ip>:<file-path>`. We are sending the iq file to all nodes. 
 
-**FYI** All .iq files must contain a number of samples that is a multiple of 1024. Otherwise transmission fails due to a bug in Shout.
+**FYI** All .iq files must contain a number of samples that is an integer multiple of 1024. Otherwise transmission fails due to a bug in Shout.
 
 For my recent experiment, the commands were:
 ```
