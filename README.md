@@ -137,10 +137,10 @@ Change the local file path and name, username, and ip addresses to suit your exp
 
 > **Optionally, you can send different iq files to each client**. But the files have to have the same name on the client, because the JSON file only lists one file name, identical for each client. In that case, you would assign an identical filename on the client node, even though the files are named differently on your laptop:
 > ```
-> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@cnode-ebc.emulab.net:/local/repository/shout/signal_library/ofdm.iq
-> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-b.iq npatwari@cnode-guesthouse.emulab.net:/local/repository/shout/signal_library/ofdm.iq
-> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-c.iq npatwari@cnode-mario.emulab.net:/local/repository/shout/signal_library/ofdm.iq
-> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-d.iq npatwari@cnode-moran.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-a.iq npatwari@pc05-fort.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-b.iq npatwari@pc09-fort.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-c.iq npatwari@pc08-fort.emulab.net:/local/repository/shout/signal_library/ofdm.iq
+> scp /Users/neal/git/npatwari/shout-over-each-other/channel-sounding-OFDM-packet-27-03-26-d.iq npatwari@pc11-fort.emulab.net:/local/repository/shout/signal_library/ofdm.iq
 > ```
 
 Next, send the .json file to each node (clients and ORCH node). I run these commands in a terminal on my local laptop. The form is `scp <local file> <username>@<destination-ip>:<file-path>`. We are sending the JSON file to all nodes. For my recent experiment, the commands were:
